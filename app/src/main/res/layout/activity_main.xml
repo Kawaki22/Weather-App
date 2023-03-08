@@ -10,7 +10,7 @@
 
     <TextView
         android:id="@+id/tvWeather"
-        android:layout_width="200dp"
+        android:layout_width="280dp"
         android:layout_height="50dp"
         android:gravity="center"
         android:fontFamily="sans-serif-black"
@@ -67,9 +67,11 @@
 
         <TextView
             android:id="@+id/tv1"
-            android:layout_width="150dp"
+            android:layout_width="180dp"
             android:layout_height="50dp"
-            android:layout_margin="100dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="120dp"
             android:gravity="center"
             android:text=""
             android:textColor="@color/black"
@@ -133,6 +135,9 @@
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:text="Retry"
+        android:visibility="invisible"
+        android:onClick="retry"
+        android:layout_marginBottom="200dp"
         app:layout_constraintCircleRadius="510dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

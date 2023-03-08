@@ -3,18 +3,14 @@ package com.kawaki.weather
 import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Editable
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
-import android.widget.ImageButton
 import android.widget.ProgressBar
 import android.widget.TextView
-import android.widget.Toast
 import androidx.cardview.widget.CardView
 import org.json.JSONObject
 import java.net.URL
-import java.util.*
 
 class MainActivity : AppCompatActivity() {
     lateinit var etcity:EditText//"dhaka,bd"
@@ -51,15 +47,13 @@ class MainActivity : AppCompatActivity() {
         }
 
         override fun doInBackground(vararg params: String?): String? {
-            var city:String?=etcity.text.toString()//"delhi,in"
+            var city:String?=etcity.text.toString().trim()//"delhi,in"
             var response:String?
             try {
                 response = URL("https://api.openweathermap.org/data/2.5/weather?q=$city&units=metric&appid=$api").readText(Charsets.UTF_8)
-            }catch (ex:Exception){
+                }
+            catch (ex:Exception){
                 response=null
-                /*findViewById<CardView>(R.id.cardView).visibility= View.GONE
-                findViewById<TextView>(R.id.tvWeather).visibility= View.GONE
-                findViewById<TextView>(R.id.tvError).visibility= View.VISIBLE*/
             }
             return response
         }
@@ -68,17 +62,17 @@ class MainActivity : AppCompatActivity() {
             super.onPostExecute(result)
             try {
                 // Extracting JSON from the API
-                val jsonObj = JSONObject(result)
-                val main = jsonObj.getJSONObject("main")
-                val sys = jsonObj.getJSONObject("sys")
-                val weather = jsonObj.getJSONArray("weather").getJSONObject(0)
+                val json = JSONObject(result)
+                val main = json.getJSONObject("main")
+                val sys = json.getJSONObject("sys")
+                val weather = json.getJSONArray("weather").getJSONObject(0)
 
                 val temp = main.getString("temp")
                 val tempMin =main.getString("temp_min")
                 val tempMax = main.getString("temp_max")
                 val weatherDescription = weather.getString("description")
 
-                val address = jsonObj.getString("name")+","+sys.getString("country")
+                val address = json.getString("name")+","+sys.getString("country")
 
                 //display values
                 findViewById<TextView>(R.id.tv1).text="Temperature: $temp°C"
