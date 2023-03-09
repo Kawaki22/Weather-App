@@ -1,5 +1,6 @@
 package com.kawaki.weather
 
+import android.content.Intent
 import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -15,6 +16,7 @@ import android.widget.TextView
 import androidx.appcompat.widget.SwitchCompat
 import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
+import com.google.android.material.button.MaterialButton
 import org.json.JSONObject
 import java.net.URL
 
@@ -22,14 +24,11 @@ class MainActivity : AppCompatActivity() {
     lateinit var etcity:EditText//variable of EditText type
     var api:String="ea4a8be06f4a8d7e1ba8ac87710f2e95"//api key
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        //Hide Action Bar
-        if(supportActionBar!=null){
-            supportActionBar!!.hide()
-        }
 
         etcity=findViewById(R.id.etCity)//assigning EditText variable to edit text box
 
@@ -41,17 +40,12 @@ class MainActivity : AppCompatActivity() {
         buttonHide()
     }
 
-    //restarting main activity after error
-    fun retry(view: View){
-        finish()
-        startActivity(intent)
-        overridePendingTransition(0,1)
-    }
-
     //light mode
     fun lightkMode(view: View){
+        //Layouts with id for retry() and lightMode() functions
         var constarintLayot:ConstraintLayout=findViewById(R.id.constraint)
         var relativeLayout:RelativeLayout=findViewById(R.id.relative)
+
         if(findViewById<SwitchCompat>(R.id.switch1).isChecked){
             findViewById<SwitchCompat>(R.id.switch1).text="Dark Mode"
             constarintLayot.setBackgroundResource(R.drawable.day)
@@ -72,6 +66,12 @@ class MainActivity : AppCompatActivity() {
         if (view != null) {
             inputMethod.hideSoftInputFromWindow(view.getWindowToken(),0)
         }
+    }
+
+    //Showing ErrorMsg Screen
+    fun CallErrorScreen(){
+        val intent = Intent(this,ErrorMsg::class.java)
+        startActivity(intent)
     }
 
     //inner class inheriting AsyncTask class(inbuilt)
@@ -117,11 +117,7 @@ class MainActivity : AppCompatActivity() {
                 findViewById<TextView>(R.id.tvWeather).text=address
 
             }catch (ex:Exception){
-                findViewById<CardView>(R.id.cardView).visibility= View.GONE
-                findViewById<TextView>(R.id.tvWeather).visibility= View.GONE
-                findViewById<SwitchCompat>(R.id.switch1).visibility= View.GONE
-                findViewById<TextView>(R.id.tvError).visibility= View.VISIBLE
-                findViewById<Button>(R.id.btnRetry).visibility= View.VISIBLE
+                CallErrorScreen()
                 buttonHide()
             }
         }

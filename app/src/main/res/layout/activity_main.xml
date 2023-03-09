@@ -121,36 +121,6 @@
 
     </androidx.cardview.widget.CardView>
 
-    <TextView
-        android:id="@+id/tvError"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:fontFamily="sans-serif-black"
-        android:textSize="50px"
-        android:gravity="center"
-        android:text="Something Went Wrong"
-        android:textColor="@color/black"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"></TextView>
-
-    <Button
-        android:id="@+id/btnRetry"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:text="Retry"
-        android:visibility="invisible"
-        android:onClick="retry"
-        android:backgroundTint="@color/white"
-        android:layout_marginBottom="200dp"
-        app:layout_constraintCircleRadius="510dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvError"></Button>
-
     <ProgressBar
         android:id="@+id/loading"
         android:layout_width="wrap_content"
